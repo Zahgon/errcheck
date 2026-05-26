@@ -1,12 +1,5 @@
 package errcheck
 
-import (
-	"bufio"
-	"bytes"
-	"os"
-	"strings"
-)
-
 // DefaultExcludedSymbols is a list of symbol names that are usually excluded from checks by default.
 //
 // Note, that they still need to be explicitly copied to Checker.Exclusions.Symbols
@@ -64,27 +57,6 @@ var DefaultExcludedSymbols = []string{
 // patterns for which to allow unchecked errors.
 //
 // Lines that start with two forward slashes are considered comments and are ignored.
-func ReadExcludes(path string) ([]string, error) {
-	var excludes []string
+func ReadExcludes(path string) ([]string, error) { _ = "STUB: not implemented"; return nil, nil }
 
-	buf, err := os.ReadFile(path)
-	if err != nil {
-		return nil, err
-	}
-
-	scanner := bufio.NewScanner(bytes.NewReader(buf))
-
-	for scanner.Scan() {
-		name := scanner.Text()
-		// Skip comments and empty lines.
-		if strings.HasPrefix(name, "//") || name == "" {
-			continue
-		}
-		excludes = append(excludes, name)
-	}
-	if err := scanner.Err(); err != nil {
-		return nil, err
-	}
-
-	return excludes, nil
-}
+// Skip comments and empty lines.
